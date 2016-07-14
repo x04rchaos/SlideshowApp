@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     var dispImageNo = 0
     var timerRunning = false
     var timer: NSTimer?
-    var imageNameArray:NSMutableArray?
+    var imageNameArray:NSMutableArray? = [ "img1", "img2", "img3", ]
 
     
     // 遷移先から戻る設定
@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     // 画像をタップして画面遷移
     @IBAction func tapImage(sender: AnyObject) {
         performSegueWithIdentifier("scaleup", sender: nil)
+
     }
     
     // 前へボタン
@@ -115,6 +116,10 @@ class ViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let name = imageNameArray![dispImageNo]
         let image = UIImage(named: name as! String)
+        
+        if timerRunning == true {
+            timer?.invalidate()
+        }
         
         print("\(name)")
         print(image)
